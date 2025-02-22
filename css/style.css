@@ -1,0 +1,109 @@
+/**
+ * Author Names: Sai Trivedi - 100927464
+ * Vaidehi Garge- 100930886
+ * Date: 01-25-2025
+ */
+/* Ensure enough space for the Submit button and other content */
+.container {
+    padding-bottom: 90px; /* Add space below the form to avoid overlap with the sticky footer */
+}
+
+/* For the sticky footer */
+.sticky-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: midnightblue;
+    text-align: center;
+    padding: 10px 0;
+    z-index: 1000; /* Ensure it's always on top */
+}
+
+/* Footer content */
+.footer-content {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+/* Ensure content doesn't get hidden behind footer and provide space for scrolling */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Content starts at the top */
+    padding-bottom: 150px; /* Ensure space for footer and buttons */
+}
+
+/* Style for Get Involved button */
+#getInvolvedBtn {
+    margin-top: 2rem;
+    margin-bottom: 50px; /* Add bottom margin to separate it from the footer */
+}
+
+/* Form container for the contact page */
+.contact-form-container {
+    padding-bottom: 100px; /* Add space below the form to avoid overlap with the footer */
+}
+
+/* Footer styling */
+footer {
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Styling for Back to Top button */
+#backToTop {
+    position: fixed;
+    bottom: 70px; /* Adjust this value to be above the footer */
+    right: 20px;
+    background-color: #4a81ea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    z-index: 1100; /* Ensure it stays on top of the footer */
+}
+
+#backToTop:hover {
+    background-color: #0056b3;
+}
+
+/* Styling for the center links container */
+.center-links {
+    text-align: center;
+}
+
+.center-links a {
+    text-decoration: none;
+    color: #4a81ea;
+}
+
+.center-links a:hover {
+    text-decoration: underline;
+}

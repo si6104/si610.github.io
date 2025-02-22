@@ -1,0 +1,145 @@
+<!--
+Author Names: Sai Trivedi - 100927464
+             Vaidehi Garge- 100930886
+Date: 01-25-2025
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Connect - Events</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Dynamic navbar content-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Opportunities</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="opportunities.html">Opportunities</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="events.html">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        More
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="privacy.html">Privacy Policy</a></li>
+                        <li><a class="dropdown-item" href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container my-5">
+    <h1 class="text-center mb-4">Upcoming Events</h1>
+    <p class="text-center mb-5">Filter events by category to find opportunities that interest you.</p>
+
+    <!-- Event Filter -->
+    <div class="text-center mb-4">
+        <select id="categoryFilter" class="form-select w-50 mx-auto">
+            <option value="all">All Categories</option>
+            <option value="fundraisers">Fundraisers</option>
+            <option value="workshops">Workshops</option>
+            <option value="cleanups">Cleanups</option>
+        </select>
+    </div>
+
+    <!-- Event Grid -->
+    <div id="eventGrid" class="row row-cols-1 row-cols-md-3 g-4">
+        <!-- Event Cards are dynamically generated here -->
+    </div>
+</div>
+
+
+
+<!-- jQuery -->
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        function fetchEvents() {
+            $.ajax({
+                url: "../data/events.json",
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    renderEvents(data);
+                },
+                error: function (xhr, status, error) {
+                    $("#eventGrid").html(`<p class="text-danger text-center">Failed to load events. Please try again later.</p>`);
+                    console.error("Error loading events:", status, error);
+                }
+            });
+        }
+
+        function renderEvents(events, filteredCategory = "all") {
+            const eventGrid = $("#eventGrid");
+            eventGrid.empty();
+
+            let filteredEvents = events.filter(event => filteredCategory === "all" || event.category === filteredCategory);
+
+            if (filteredEvents.length === 0) {
+                eventGrid.html(`<p class="text-center text-warning">No events found for the selected category.</p>`);
+                return;
+            }
+
+            filteredEvents.forEach(event => {
+                const eventCard = `
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">${event.title}</h5>
+                                <p class="card-text"><strong>Date:</strong> ${event.date}</p>
+                                <p class="card-text"><strong>Location:</strong> ${event.location}</p>
+                                <p class="card-text">${event.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                eventGrid.append(eventCard);
+            });
+        }
+
+        $("#categoryFilter").on("change", function () {
+            let selectedCategory = $(this).val();
+            $.getJSON("../data/events.json", function (data) {
+                renderEvents(data, selectedCategory);
+            }).fail(function () {
+                $("#eventGrid").html(`<p class="text-danger text-center">Failed to filter events.</p>`);
+            });
+        });
+
+        fetchEvents(); // Load events on page load
+    });
+</script>
+<script src="../js/main.js"></script>
+
+</body>
+</html>

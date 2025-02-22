@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Garden Cleanup",
+    "date": "March 5, 2025",
+    "location": "Central Park",
+    "category": "cleanups",
+    "description": "Join us to restore the beauty of local gardens."
+  },
+  {
+    "title": "Community Workshop",
+    "date": "March 12, 2025",
+    "location": "City Hall",
+    "category": "workshops",
+    "description": "Learn and share valuable skills in this interactive workshop."
+  },
+  {
+    "title": "Beach Cleanup",
+    "date": "March 19, 2025",
+    "location": "Sunshine Beach",
+    "category": "cleanups",
+    "description": "Help us create a cleaner environment for everyone."
+  },
+  {
+    "title": "Charity Fundraiser",
+    "date": "March 25, 2025",
+    "location": "Grand Ballroom",
+    "category": "fundraisers",
+    "description": "Support our charity and make a difference."
+  }
+]

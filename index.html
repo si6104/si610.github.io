@@ -1,0 +1,125 @@
+<!--
+Author Names: Sai Trivedi - 100927464
+             Vaidehi Garge- 100930886
+Date: 01-25-2025
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Connect - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Dynamic navbar content-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Volunteer Connect</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/opportunities.html">Opportunities</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/events.html">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/contact.html">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/about.html">About</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        More
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="pages/privacy.html">Privacy Policy</a></li>
+                        <li><a class="dropdown-item" href="pages/terms.html">Terms of Service</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-5">
+    <!-- Welcoming Message -->
+    <div class="text-center">
+        <h1>Welcome to Volunteer Connect</h1>
+        <p class="lead">Connecting you with impactful opportunities to serve your community.</p>
+    </div>
+</div>
+
+<!-- Carousel -->
+<div id="volunteerCarousel" class="carousel slide container mt-4" data-bs-ride="carousel" style="max-width: 1500px;">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="images/volunteer1.jpg" class="d-block w-100 rounded-2" alt="Volunteer Activity 1" style="height: 550px; object-fit: cover;">
+            <div class="carousel-caption bg-dark bg-opacity-50 text-white p-2 rounded">
+                <h5>Garden Cleanup</h5>
+                <p>Join hands to restore the beauty of local gardens and create a green, inviting space for everyone.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="images/volunteer2.jpg" class="d-block w-100 rounded-2" alt="Volunteer Activity 2" style="height: 450px; object-fit: cover;">
+            <div class="carousel-caption bg-dark bg-opacity-50 text-white p-2 rounded">
+                <h5>Community Workshop</h5>
+                <p>Learn and share valuable skills to empower the community in this interactive workshop.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="images/volunteer3.jpg" class="d-block w-100 rounded-2" alt="Volunteer Activity 3" style="height: 450px; object-fit: cover;">
+            <div class="carousel-caption bg-dark bg-opacity-50 text-white p-2 rounded">
+                <h5>Fire Extinguisher</h5>
+                <p>Equip yourself with essential fire safety knowledge and hands-on extinguisher training.</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#volunteerCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#volunteerCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+<!-- Get Involved Button -->
+
+    <div class="text-center">
+        <button id="getInvolvedBtn" class="btn btn-primary btn-lg">Get Involved </button>
+    </div>
+
+<!-- Footer (Sticky) -->
+<footer>
+    <p><a href="/pages/privacy.html">Privacy Policy</a> | <a href="/pages/terms.html">Terms of Service</a></p>
+</footer>
+
+<!-- Back to Top Button -->
+<button id="backToTop" title="Go to top">Back to Top</button>
+
+
+<!-- jQuery -->
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Moment.js -->
+<script src="node_modules/moment/moment.js"></script>
+<!-- Your custom JS -->
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Garden Cleanup Volunteers",
+    "thumbnail": "../images/thumbnails/garden_cleanup.jpg",
+    "full": "../images/fullsize/garden_cleanup.jpg"
+  },
+  {
+    "title": "Community Workshop",
+    "thumbnail": "../images/thumbnails/workshop.jpg",
+    "full": "../images/fullsize/workshop.jpg"
+  },
+  {
+    "title": "Beach Cleanup Team",
+    "thumbnail": "../images/thumbnails/beach_cleanup.jpg",
+    "full": "../images/fullsize/beach_cleanup.jpg"
+  },
+  {
+    "title": "Charity Fundraiser Event",
+    "thumbnail": "../images/thumbnails/fundraiser.jpg",
+    "full": "../images/fullsize/fundraiser.jpg"
+  }
+]
