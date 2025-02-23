@@ -1,22 +1,39 @@
 [
   {
-    "title": "Garden Cleanup Volunteers",
-    "thumbnail": "../images/thumbnails/garden_cleanup.jpg",
-    "full": "../images/fullsize/garden_cleanup.jpg"
+    "title": "Community Cleanup",
+    "image": "../images/cleanup.jpg",
+    "description": "Volunteers cleaning the park."
   },
   {
-    "title": "Community Workshop",
-    "thumbnail": "../images/thumbnails/workshop.jpg",
-    "full": "../images/fullsize/workshop.jpg"
+    "title": "Food Drive",
+    "image": "../images/food-drive.jpg",
+    "description": "Sorting donated food items."
   },
   {
-    "title": "Beach Cleanup Team",
-    "thumbnail": "../images/thumbnails/beach_cleanup.jpg",
-    "full": "../images/fullsize/beach_cleanup.jpg"
+    "title": "Tree Planting",
+    "image": "../images/tree-planting.jpg",
+    "description": "Planting trees for a greener future."
   },
-  {
-    "title": "Charity Fundraiser Event",
-    "thumbnail": "../images/thumbnails/fundraiser.jpg",
-    "full": "../images/fullsize/fundraiser.jpg"
-  }
-]
+    {
+      "title": "Beach Cleanup Drive",
+      "image": "../images/beach-cleanup.jpg",
+      "description": "Dedicated volunteers working together to clean up our beautiful shoreline."
+    },
+    {
+      "title": "Recycling Awareness Campaign",
+      "image": "../images/recycling-campaign.jpg",
+      "description": "Encouraging proper waste disposal and recycling for a greener future."
+    },
+    {
+      "title": "Spreading Smiles at Senior Homes",
+      "image": "../images/elderly-care.jpg",
+      "description": "Volunteers engaging with seniors through storytelling and music."
+    },
+    {
+      "title": "Be a Lifesaver – Donate Blood",
+      "image": "../images/blood-donation.jpg",
+      "description": "Every drop counts! Helping those in critical need of blood donations."
+    }
+  ]
+
+

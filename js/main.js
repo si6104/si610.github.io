@@ -7,6 +7,178 @@
 "use strict";
 
 /**
+ * login and log out
+ */
+
+document.addEventListener("DOMContentLoaded", function () {
+    const authLink = document.getElementById("authLink");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const logoutItem = document.getElementById("logoutItem");
+    const welcomeMessage = document.getElementById("welcomeMessage");
+    const usernameDisplay = document.getElementById("usernameDisplay");
+
+    // Check if user is logged in
+    function checkAuth() {
+        const loggedInUser = localStorage.getItem("loggedInUser");
+
+        if (loggedInUser) {
+            authLink.classList.add("d-none"); // Hide "Login"
+            logoutItem.classList.remove("d-none"); // Show "Logout"
+            welcomeMessage.classList.remove("d-none"); // Show welcome message
+            usernameDisplay.textContent = loggedInUser; // Set username
+        } else {
+            authLink.classList.remove("d-none"); // Show "Login"
+            logoutItem.classList.add("d-none"); // Hide "Logout"
+            welcomeMessage.classList.add("d-none"); // Hide welcome message
+        }
+    }
+
+    // Logout functionality
+    logoutBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        localStorage.removeItem("loggedInUser"); // Remove user session
+        checkAuth(); // Update UI
+        window.location.href = "index.html"; // Redirect to homepage
+    });
+
+    checkAuth(); // Run on page load
+});
+
+
+/**
+ * dynamic search bar
+ */
+document.addEventListener("DOMContentLoaded", function () {
+    const searchForm = document.getElementById("searchForm");
+    const searchInput = document.getElementById("searchInput");
+
+    if (searchForm) {
+        searchForm.addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            const query = searchInput.value.trim().toLowerCase();
+            const pages = {
+                "home": "index.html",
+                "opportunities": "pages/opportunities.html",
+                "events": "pages/events.html",
+                "contact us": "pages/contact.html",
+                "about": "pages/about.html",
+                "donate": "pages/donate.html",
+                "gallery": "pages/gallery.html",
+                "privacy policy": "pages/privacy.html",
+                "terms of service": "pages/terms.html"
+            };
+
+            if (pages[query]) {
+                // Ensure the correct path is used from different directories
+                let basePath = window.location.pathname.includes("/pages/") ? "../" : "";
+                window.location.href = basePath + pages[query];
+            } else {
+                alert("Page not found. Try searching for pages in the navbar.");
+            }
+        });
+    }
+});
+
+
+/**
+ * Implement AJAX & Lightbox
+ */
+document.addEventListener("DOMContentLoaded", function () {
+    fetchGalleryImages();
+});
+
+function fetchGalleryImages() {
+    fetch("../data/gallery.json")
+        .then(response => response.json())
+        .then(data => {
+            displayGallery(data);
+        })
+        .catch(error => console.error("Error loading gallery images:", error));
+}
+
+function displayGallery(images) {
+    const galleryContainer = document.getElementById("gallery");
+    galleryContainer.innerHTML = ""; // Clear previous content
+
+    images.forEach(image => {
+        const imgElement = document.createElement("img");
+        imgElement.src = image.image;
+        imgElement.alt = image.title;
+        imgElement.classList.add("gallery-image");
+
+        // Store title, description, and image source as data attributes
+        imgElement.dataset.title = image.title;
+        imgElement.dataset.description = image.description;
+        imgElement.dataset.fullsize = image.image; // Make sure to use the correct path
+
+        imgElement.addEventListener("click", () => openLightbox(image.image, image.title, image.description));
+
+        const imgWrapper = document.createElement("div");
+        imgWrapper.classList.add("gallery-item");
+        imgWrapper.appendChild(imgElement);
+
+        galleryContainer.appendChild(imgWrapper);
+    });
+}
+
+function openLightbox(imageSrc, title, description) {
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const lightboxTitle = document.getElementById("lightbox-title");
+    const lightboxDesc = document.getElementById("lightbox-desc");
+
+    // Debugging: Check if the correct image path is being passed
+    console.log("Opening Lightbox with image:", imageSrc);
+
+    // Ensure the correct path (no extra "../")
+    lightboxImg.src = imageSrc; // Set image source directly
+    lightboxTitle.textContent = title; // Set title
+    lightboxDesc.textContent = description; // Set description
+
+    lightbox.style.display = "flex"; // Show lightbox
+}
+
+function closeLightbox() {
+    document.getElementById("lightbox").style.display = "none";
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const closeBtn = document.querySelector(".close");
+
+    // Close when clicking "X"
+    closeBtn.addEventListener("click", closeLightbox);
+
+    // Close when clicking outside the image but not on text
+    lightbox.addEventListener("click", function (event) {
+        if (!event.target.closest(".lightbox-content") && event.target !== document.getElementById("lightbox-text")) {
+            closeLightbox();
+        }
+    });
+
+    // Escape key to close lightbox
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            closeLightbox();
+        }
+    });
+
+    // Attach openLightbox function to images
+    document.getElementById("gallery").addEventListener("click", function (event) {
+        if (event.target.tagName === "IMG") {
+            openLightbox(
+                event.target.dataset.fullsize,
+                event.target.dataset.title,
+                event.target.dataset.description
+            );
+        }
+    });
+});
+
+
+/**
  * Utility function to prevent redundant DOMContentLoaded listeners
  * @param callback
  */
@@ -18,42 +190,42 @@ function onDOMContentLoaded(callback) {
     }
 }
 
-/**
- * Added Donate link to
- */
-    document.addEventListener("DOMContentLoaded", () => {
-    // Select the navbar menu (ul element)
-    const navbarMenu = document.querySelector(".navbar-nav");
+// /**
+//  * Added Donate link to
+//  */
+//     document.addEventListener("DOMContentLoaded", () => {
+//     // Select the navbar menu (ul element)
+//     const navbarMenu = document.querySelector(".navbar-nav");
+//
+//     // Add a "Donate" link programmatically before the "More" link
+//     const donateLink = document.createElement("li");
+//     donateLink.className = "nav-item"; // Add the same class as other navbar items
+//     donateLink.innerHTML = `<a class="nav-link" href="/pages/donate.html">Donate</a>`;
+//
+//     // Find the "More" link in the navbar
+//     const moreLink = Array.from(navbarMenu.getElementsByTagName("a")).find(
+//         (link) => link.textContent.trim() === "More"
+//     );
+//
+//     // If the "More" link exists, insert the "Donate" link before it
+//     if (moreLink) {
+//         navbarMenu.insertBefore(donateLink, moreLink.parentElement); // Insert before the "More" link
+//     } else {
+//         // If there's no "More" link, just append the "Donate" link to the navbar
+//         navbarMenu.appendChild(donateLink);
+//     }
 
-    // Add a "Donate" link programmatically before the "More" link
-    const donateLink = document.createElement("li");
-    donateLink.className = "nav-item"; // Add the same class as other navbar items
-    donateLink.innerHTML = `<a class="nav-link" href="/pages/donate.html">Donate</a>`;
-
-    // Find the "More" link in the navbar
-    const moreLink = Array.from(navbarMenu.getElementsByTagName("a")).find(
-        (link) => link.textContent.trim() === "More"
-    );
-
-    // If the "More" link exists, insert the "Donate" link before it
-    if (moreLink) {
-        navbarMenu.insertBefore(donateLink, moreLink.parentElement); // Insert before the "More" link
-    } else {
-        // If there's no "More" link, just append the "Donate" link to the navbar
-        navbarMenu.appendChild(donateLink);
-    }
-
-        /**
-         * Change "Opportunities" link text to "Volunteer Now"
-         * @type {HTMLAnchorElement}
-         */
-    const opportunitiesLink = Array.from(navbarMenu.getElementsByTagName("a")).find(
-        (link) => link.textContent.trim() === "Opportunities"
-    );
-    if (opportunitiesLink) {
-        opportunitiesLink.textContent = "Volunteer Now";
-    }
-});
+//         /**
+//          * Change "Opportunities" link text to "Volunteer Now"
+//          * @type {HTMLAnchorElement}
+//          */
+//     const opportunitiesLink = Array.from(navbarMenu.getElementsByTagName("a")).find(
+//         (link) => link.textContent.trim() === "Opportunities"
+//     );
+//     if (opportunitiesLink) {
+//         opportunitiesLink.textContent = "Volunteer Now";
+//     }
+// });
 
 /**
  * Redirect to Opportunities page when 'Get Involved' button is clicked

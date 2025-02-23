@@ -1,6 +1,6 @@
 <!--
 Author Names: Sai Trivedi - 100927464
-             Vaidehi Garge- 100930886
+              Vaidehi Garge- 100930886
 Date: 01-25-2025
 -->
 
@@ -40,6 +40,12 @@ Date: 01-25-2025
                 <li class="nav-item">
                     <a class="nav-link" href="pages/about.html">About</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/donate.html">Donate</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/gallery.html">Gallery</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         More
@@ -49,10 +55,31 @@ Date: 01-25-2025
                         <li><a class="dropdown-item" href="pages/terms.html">Terms of Service</a></li>
                     </ul>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id="authLink" href="pages/login.html">Login</a>
+                </li>
+                <li class="nav-item d-none" id="logoutItem">
+                    <a class="nav-link" id="logoutBtn" href="#">Log Out</a>
+                </li>
+                <li class="nav-item d-none" id="welcomeMessage">
+                    <span class="nav-link text-success">Welcome, <span id="usernameDisplay"></span>!</span>
+                </li>
+
+
             </ul>
+            <form class="d-flex ms-auto position-relative" id="searchForm">
+                <input class="form-control me-2" type="search" id="searchInput" placeholder="Search..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+                <div id="searchDropdown" class="dropdown-menu w-100"></div>
+            </form>
         </div>
     </div>
 </nav>
+
+<!-- Search bar -->
+<div id="searchResults" class="container mt-3"></div>
+
 
 <div class="container my-5">
     <!-- Welcoming Message -->
