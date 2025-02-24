@@ -7,42 +7,126 @@
 "use strict";
 
 /**
- * login and log out
+ * define the initMap function to initialize the map
  */
+function initMap() {
+    const mapOptions = {
+        center: { lat: 43.897, lng: -78.865 }, // Coordinates for Oshawa, Ontario
+        zoom: 12,
+    };
+    const map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-document.addEventListener("DOMContentLoaded", function () {
-    const authLink = document.getElementById("authLink");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const logoutItem = document.getElementById("logoutItem");
-    const welcomeMessage = document.getElementById("welcomeMessage");
-    const usernameDisplay = document.getElementById("usernameDisplay");
+    // Example volunteer opportunities data
+    const volunteerOpportunities = [
+        { name: 'Community Center A', lat: 43.900, lng: -78.860, description: 'Assisting with local events.' },
+        { name: 'Food Bank B', lat: 43.895, lng: -78.870, description: 'Helping distribute food to those in need.' },
+        // Add more opportunities here
+    ];
 
-    // Check if user is logged in
-    function checkAuth() {
-        const loggedInUser = localStorage.getItem("loggedInUser");
+    // Add markers for each opportunity
+    volunteerOpportunities.forEach(opportunity => {
+        const marker = new google.maps.Marker({
+            position: { lat: opportunity.lat, lng: opportunity.lng },
+            map: map,
+            title: opportunity.name,
+        });
 
-        if (loggedInUser) {
-            authLink.classList.add("d-none"); // Hide "Login"
-            logoutItem.classList.remove("d-none"); // Show "Logout"
-            welcomeMessage.classList.remove("d-none"); // Show welcome message
-            usernameDisplay.textContent = loggedInUser; // Set username
-        } else {
-            authLink.classList.remove("d-none"); // Show "Login"
-            logoutItem.classList.add("d-none"); // Hide "Logout"
-            welcomeMessage.classList.add("d-none"); // Hide welcome message
-        }
+        const infoWindow = new google.maps.InfoWindow({
+            content: `<h3>${opportunity.name}</h3><p>${opportunity.description}</p>`,
+        });
+
+        marker.addListener('click', () => {
+            infoWindow.open(map, marker);
+        });
+    });
+}
+
+
+/**
+ * Function to highlight the active page link
+ * **/
+    function highlightActivePage() {
+    // Get all links in the navbar
+    const navbarLinks = document.querySelectorAll('.navbar-nav a');
+
+    // Get the current page's URL
+    const currentPage = window.location.pathname.split("/").pop();
+
+    // Loop through each navbar link
+    navbarLinks.forEach(link => {
+    // Check if the link's href matches the current page
+    if (link.getAttribute('href').endsWith(currentPage)) {
+    // Add the 'active' class to the matching link
+    link.classList.add('active');
+
+    } else {
+    // Remove the 'active' class from other links
+    link.classList.remove('active');
+    }
+    });
     }
 
-    // Logout functionality
-    logoutBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-        localStorage.removeItem("loggedInUser"); // Remove user session
-        checkAuth(); // Update UI
-        window.location.href = "index.html"; // Redirect to homepage
-    });
+    // Call highlightActivePage on page load
+    window.onload = function() {
+    highlightActivePage();
+};
 
-    checkAuth(); // Run on page load
+
+/** Function to update the navbar based on login status **/
+function updateNavbar() {
+    const username = sessionStorage.getItem("loggedInUser"); // Check if user is logged in
+
+    const loginLink = document.getElementById("navLogin");
+    const logoutButton = document.getElementById("navLogout");
+    const welcomeMessage = document.getElementById("welcomeMessage");
+
+    if (username) {
+        loginLink.style.display = "none"; // Hide login
+        logoutButton.style.display = "inline-block"; // Show logout
+        welcomeMessage.innerHTML = `Welcome, <strong>${username}</strong>!`;
+    } else {
+        loginLink.style.display = "inline-block"; // Show login
+        logoutButton.style.display = "none"; // Hide logout
+        welcomeMessage.innerHTML = ""; // Clear message
+    }
+}
+
+async function validateLogin(username, password) {
+    try {
+        const response = await fetch("../data/users.json");
+        const users = await response.json();
+
+        const user = users.find(user => user.username === username && user.password === password);
+        if (user) {
+            sessionStorage.setItem("loggedInUser", username); // Store login session
+            alert("Login successful!");
+            updateNavbar(); // Update navbar immediately
+            window.location.href = "../index.html"; // Redirect to homepage
+        } else {
+            alert("Invalid username or password!");
+        }
+    } catch (error) {
+        console.error("Error loading user data:", error);
+        alert("Error fetching user data. Please try again later.");
+    }
+}
+
+/** Function to handle logout **/
+function logout() {
+    sessionStorage.removeItem("loggedInUser"); // Clear session
+    alert("You have logged out.");
+    updateNavbar(); // Update navbar after logout
+    window.location.href = "../index.html"; // Redirect to homepage
+}
+
+/** Ensure the navbar updates when the page loads **/
+document.addEventListener("DOMContentLoaded", function () {
+    updateNavbar();  //  Ensure navbar updates on every page
+    highlightActivePage();  //  Highlight the active page
 });
+
+/** Attach logout button click event **/
+document.getElementById("navLogout").addEventListener("click", logout);
 
 
 /**
@@ -226,6 +310,7 @@ function onDOMContentLoaded(callback) {
 //         opportunitiesLink.textContent = "Volunteer Now";
 //     }
 // });
+
 
 /**
  * Redirect to Opportunities page when 'Get Involved' button is clicked
@@ -468,3 +553,88 @@ function onDOMContentLoaded(callback) {
         createStickyFooter();
 
 });
+document.addEventListener("DOMContentLoaded", function () {
+    // Feedback Form Submission with AJAX
+    document.getElementById("feedbackForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Get form values
+        const feedbackName = document.getElementById("feedbackName").value.trim();
+        const feedbackEmail = document.getElementById("feedbackEmail").value.trim();
+        const feedbackMessage = document.getElementById("feedbackMessage").value.trim();
+
+        // Validate form fields
+        if (!feedbackName || !feedbackEmail || !feedbackMessage) {
+            alert("Please fill in all fields before submitting.");
+            return;
+        }
+
+        // Simulate AJAX submission
+        setTimeout(function () {
+            // Populate modal with submitted feedback
+            document.getElementById("modalFeedbackName").textContent = feedbackName;
+            document.getElementById("modalFeedbackEmail").textContent = feedbackEmail;
+            document.getElementById("modalFeedbackMessage").textContent = feedbackMessage;
+
+            // Show confirmation modal
+            new bootstrap.Modal(document.getElementById("feedbackModal")).show();
+
+            // Reset form
+            document.getElementById("feedbackForm").reset();
+        }, 1000); // Simulate a delay for the AJAX call
+    });
+});
+
+document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const feedback = document.getElementById('feedback').value;
+
+    const formData = {
+        name: name,
+        email: email,
+        feedback: feedback
+    };
+
+    // Mock API call or external endpoint (for example, using JSONPlaceholder)
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://jsonplaceholder.typicode.com/posts', true); // You can replace this with your actual API endpoint
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 201) {
+            // Handle success response (assuming you are using an API like JSONPlaceholder)
+            showConfirmationModal(name, email, feedback);
+        }
+    };
+
+    // Send the form data as a JSON string
+    xhr.send(JSON.stringify(formData));
+});
+
+function showConfirmationModal(name, email, feedback) {
+    const modalContent = `
+        <p>Thank you for your feedback, ${name}!</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Feedback:</strong> ${feedback}</p>
+    `;
+    const modal = document.createElement('div');
+    modal.classList.add('modal');
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            ${modalContent}
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    // Close the modal when the close button is clicked
+    modal.querySelector('.close-button').addEventListener('click', function() {
+        modal.remove();
+    });
+
+    modal.style.display = 'block'; // Show modal
+}
+

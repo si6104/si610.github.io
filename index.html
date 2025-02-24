@@ -16,6 +16,7 @@ Date: 01-25-2025
 </head>
 <body>
 
+
 <!-- Dynamic navbar content-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -44,27 +45,25 @@ Date: 01-25-2025
                     <a class="nav-link" href="pages/donate.html">Donate</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="pages/gallery.html">Gallery</a>
+                    <a class="nav-link" href="pages/map.html">Map</a>
                 </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         More
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="pages/privacy.html">Privacy Policy</a></li>
-                        <li><a class="dropdown-item" href="pages/terms.html">Terms of Service</a></li>
+                        <li><a class="dropdown-item" href="pages/privacy.html"><i class="fas fa-user-shield"></i> Privacy Policy</a></li>
+                        <li><a class="dropdown-item" href="pages/terms.html"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                        <li><a class="dropdown-item" href="pages/gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" id="authLink" href="pages/login.html">Login</a>
+                    <a class="nav-link" href="pages/login.html" id="navLogin">Login</a>
+                    <button class="btn btn-danger" id="navLogout" style="display: none;" onclick="logout()">Log Out</button>
                 </li>
-                <li class="nav-item d-none" id="logoutItem">
-                    <a class="nav-link" id="logoutBtn" href="#">Log Out</a>
-                </li>
-                <li class="nav-item d-none" id="welcomeMessage">
-                    <span class="nav-link text-success">Welcome, <span id="usernameDisplay"></span>!</span>
-                </li>
+
 
 
             </ul>
@@ -77,8 +76,11 @@ Date: 01-25-2025
     </div>
 </nav>
 
+
 <!-- Search bar -->
 <div id="searchResults" class="container mt-3"></div>
+
+<div id="welcomeMessage" class="text-center text-primary"></div>
 
 
 <div class="container my-5">
@@ -124,6 +126,15 @@ Date: 01-25-2025
     </button>
 </div>
 
+<!-- Map Section -->
+<div id="map"></div>
+
+<!-- News Section -->
+<div id="newsSection">
+    <h2>Community News</h2>
+    <ul id="newsList"></ul>
+</div>
+
 
 <!-- Get Involved Button -->
 
@@ -148,5 +159,8 @@ Date: 01-25-2025
 <script src="node_modules/moment/moment.js"></script>
 <!-- Your custom JS -->
 <script src="js/main.js"></script>
+<script src="js/news.js"></script>
+
+
 </body>
 </html>

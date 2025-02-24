@@ -41,17 +41,24 @@ Date: 01-25-2025
                     <a class="nav-link" href="donate.html">Donate</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="gallery.html">Gallery</a>
+                    <a class="nav-link" href="map.html">Map</a>
                 </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         More
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="privacy.html">Privacy Policy</a></li>
-                        <li><a class="dropdown-item" href="terms.html">Terms of Service</a></li>
+                        <li><a class="dropdown-item" href="privacy.html"><i class="fas fa-user-shield"></i> Privacy Policy</a></li>
+                        <li><a class="dropdown-item" href="terms.html"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                        <li><a class="dropdown-item" href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html" id="navLogin">Login</a>
+                    <button class="btn btn-danger" id="navLogout" style="display: none;" onclick="logout()">Log Out</button>
+                </li>
+
             </ul>
             <form class="d-flex ms-auto position-relative" id="searchForm">
                 <input class="form-control me-2" type="search" id="searchInput" placeholder="Search..." aria-label="Search">

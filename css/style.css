@@ -229,3 +229,40 @@ footer p {
 #welcomeMessage {
     font-weight: bold;
 }
+
+/* highlight active page on navbar */
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+    color: #007bff; /* Adjust the color as needed */
+}
+
+/*API : News API*/
+/* In your CSS file */
+#news-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+#news-articles .article {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+#news-articles .article h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+#news-articles .article p {
+    margin: 5px 0;
+}
+#news-articles .article a {
+    color: #007bff;
+    text-decoration: none;
+}
+#news-articles .article a:hover {
+    text-decoration: underline;
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+}
