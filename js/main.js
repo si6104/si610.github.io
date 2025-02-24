@@ -42,6 +42,32 @@ function initMap() {
 }
 
 
+// /**
+//  * fetch data from the News API and display it on your site
+//  * **/
+// document.addEventListener("DOMContentLoaded", function() {
+//     const apiKey = '0f94af0a56694e029636a5457189f3d5';
+//     const apiUrl = `https://newsapi.org/v2/top-headlines?country=ca&category=general&apiKey=${apiKey}`;
+//
+//     fetch(apiUrl)
+//         .then(response => response.json())
+//         .then(data => {
+//             const articles = data.articles;
+//             let output = '';
+//             articles.forEach(article => {
+//                 output += `
+//                     <div class="article">
+//                         <h3>${article.title}</h3>
+//                         <p>${article.description || 'No description available.'}</p>
+//                         <a href="${article.url}" target="_blank">Read more</a>
+//                     </div>
+//                 `;
+//             });
+//             document.getElementById('news-articles').innerHTML = output;
+//         })
+//         .catch(error => console.error('Error fetching news:', error));
+// });
+
 /**
  * Function to highlight the active page link
  * **/
