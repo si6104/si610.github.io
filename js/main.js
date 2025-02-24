@@ -7,7 +7,7 @@
 "use strict";
 
 /**
- * define the initMap function to initialize the map
+ * define map function to fetch api
  */
 function initMap() {
     const mapOptions = {
@@ -41,33 +41,6 @@ function initMap() {
     });
 }
 
-
-// /**
-//  * fetch data from the News API and display it on your site
-//  * **/
-// document.addEventListener("DOMContentLoaded", function() {
-//     const apiKey = '0f94af0a56694e029636a5457189f3d5';
-//     const apiUrl = `https://newsapi.org/v2/top-headlines?country=ca&category=general&apiKey=${apiKey}`;
-//
-//     fetch(apiUrl)
-//         .then(response => response.json())
-//         .then(data => {
-//             const articles = data.articles;
-//             let output = '';
-//             articles.forEach(article => {
-//                 output += `
-//                     <div class="article">
-//                         <h3>${article.title}</h3>
-//                         <p>${article.description || 'No description available.'}</p>
-//                         <a href="${article.url}" target="_blank">Read more</a>
-//                     </div>
-//                 `;
-//             });
-//             document.getElementById('news-articles').innerHTML = output;
-//         })
-//         .catch(error => console.error('Error fetching news:', error));
-// });
-
 /**
  * Function to highlight the active page link
  * **/
@@ -99,21 +72,23 @@ function initMap() {
 
 
 /** Function to update the navbar based on login status **/
+/** Function to update the navbar based on login status **/
+/** Function to update the navbar based on login status **/
 function updateNavbar() {
-    const username = sessionStorage.getItem("loggedInUser"); // Check if user is logged in
+    const username = sessionStorage.getItem("loggedInUser"); // Check if the user is logged in
 
     const loginLink = document.getElementById("navLogin");
     const logoutButton = document.getElementById("navLogout");
     const welcomeMessage = document.getElementById("welcomeMessage");
 
     if (username) {
-        loginLink.style.display = "none"; // Hide login
-        logoutButton.style.display = "inline-block"; // Show logout
-        welcomeMessage.innerHTML = `Welcome, <strong>${username}</strong>!`;
+        loginLink.style.display = "none"; // Hide login link
+        logoutButton.style.display = "inline-block"; // Show logout button
+        welcomeMessage.innerHTML = `Welcome, <strong>${username}</strong>!`; // Display the welcome message
     } else {
-        loginLink.style.display = "inline-block"; // Show login
-        logoutButton.style.display = "none"; // Hide logout
-        welcomeMessage.innerHTML = ""; // Clear message
+        loginLink.style.display = "inline-block"; // Show login link
+        logoutButton.style.display = "none"; // Hide logout button
+        welcomeMessage.innerHTML = ""; // Clear welcome message if not logged in
     }
 }
 
@@ -142,13 +117,13 @@ function logout() {
     sessionStorage.removeItem("loggedInUser"); // Clear session
     alert("You have logged out.");
     updateNavbar(); // Update navbar after logout
-    window.location.href = "../index.html"; // Redirect to homepage
+    window.location.href = "../index.html"; // Redirect to homepage after logout
 }
 
 /** Ensure the navbar updates when the page loads **/
 document.addEventListener("DOMContentLoaded", function () {
-    updateNavbar();  //  Ensure navbar updates on every page
-    highlightActivePage();  //  Highlight the active page
+    updateNavbar(); // Update navbar when the page loads
+    highlightActivePage();
 });
 
 /** Attach logout button click event **/

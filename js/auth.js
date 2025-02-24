@@ -12,23 +12,29 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("loginForm");
     const errorMessage = document.getElementById("errorMessage");
 
-    // Hardcoded users (Replace with database/API authentication in future)
-    const users = {
-        "admin": "password123",
-        "user1": "volunteer2025",
-        "user2": "helpinghands"
-    };
-
     loginForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
         const username = document.getElementById("username").value.trim();
         const password = document.getElementById("password").value.trim();
 
+        // Clear any previous error message
+        errorMessage.textContent = "";
+
+        // Hardcoded users (replace with API/database in production)
+        const users = [
+            { "username": "admin", "password": "password123" },
+            { "username": "volunteer1", "password": "pass123" },
+            { "username": "user2", "password": "volunteer2025" }
+        ];
+
         // Check credentials
-        if (users[username] && users[username] === password) {
-            localStorage.setItem("loggedInUser", username); // Store session
-            window.location.href = "../index.html"; // Redirect to home
+        const user = users.find(u => u.username === username && u.password === password);
+
+        if (user) {
+            sessionStorage.setItem("loggedInUser", username); // Store the username in sessionStorage
+            alert("Login successful!");
+            window.location.href = "../index.html"; // Redirect to homepage after successful login
         } else {
             errorMessage.textContent = "Invalid username or password.";
         }
